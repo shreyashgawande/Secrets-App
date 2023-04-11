@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const session = require('express-session');
 const passport = require('passport');
-let alert = require('alert');
 const passportLocalMongoose = require('passport-local-mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
