@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const session = require('express-session');
 const passport = require('passport');
+let alert = require('alert');
 const passportLocalMongoose = require('passport-local-mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
@@ -32,8 +33,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/userDB",{useNewUrlParser : true});
-
+// mongoose.connect("mongodb://127.0.0.1:27017/userDB",{useNewUrlParser : true});
+mongoose.connect("mongodb+srv://shreyashgawande:Shreyash8902@cluster0.pl1g7kw.mongodb.net/secrets", {useNewUrlParser: true});
 
 const userSchema = new mongoose.Schema({
   email : String,
@@ -127,8 +128,9 @@ app.get("/logout",function(req,res){
 app.post("/register",function(req,res){
   User.register({username:req.body.username},req.body.password,function(err,user){
     if(err){
-      console.log(err);
-      res.redirect("/register");
+      res.render("user_exist");
+      // console.log(err);
+      // res.redirect("/register");
     }
     else{
       passport.authenticate("local")(req,res,function(){
